@@ -36,6 +36,7 @@ const splitter = new RecursiveCharacterTextSplitter(
     }
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createCollection = async (similarityMetric:SimilarityMetric = "dot_product") => {
     const res = await db.createCollection(ASTRA_DB_COLLECTION,{
         vector : {
@@ -46,6 +47,7 @@ const createCollection = async (similarityMetric:SimilarityMetric = "dot_product
     console.log(res);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const loadSampleData = async () =>{
     const collection = await db.collection(ASTRA_DB_COLLECTION);
     for await (const url of f1Data) {
@@ -85,3 +87,5 @@ const scrapePage = async (url:string) => {
         });
     return (await loader.scrape())?.replace(/<[^>]*>/g, '');
 }
+
+createCollection().then(()=>loadSampleData())
