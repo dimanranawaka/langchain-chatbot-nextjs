@@ -4,6 +4,9 @@ import Image from "next/image";
 import f1GPTLogo from "./assets/logo.png";
 import { useChat } from "ai/react";
 import "./global.css"
+import Bubble from "./components/Bubble";
+import LoadingBubble from "./components/LoadingBubble";
+import PromptSuggestionsRow from "./components/PromptSuggestionsRow";
 
 const Home = () => {
     const {
@@ -28,12 +31,13 @@ const Home = () => {
                             on the PDFs you upload. We hope you enjoy using it!
                         </p>
                         <br />
-                        {/*<PromptSugesstionRow/>*/}
+                        <PromptSuggestionsRow/>
                     </>
                 ) : (
                     <>
                         {/*map messages onto text bubbles*/}
-                        {/*<LoadingBubble/>*/}
+                        {messages.map((message,index) => <Bubble key={`message-${index}`} message={message}/>)}
+                        {isLoading && <LoadingBubble/>}
                     </>
                 )}
                 <form onSubmit={handleSubmit}>
