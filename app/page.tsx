@@ -3,6 +3,7 @@
 import Image from "next/image";
 import f1GPTLogo from "./assets/logo.png";
 import { useChat } from "ai/react";
+import "./global.css"
 
 const Home = () => {
     const {
