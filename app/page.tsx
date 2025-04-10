@@ -3,10 +3,12 @@
 import Image from "next/image";
 import f1GPTLogo from "./assets/logo.png";
 import { useChat } from "ai/react";
+import { Message } from "ai";
 import "./global.css"
 import Bubble from "./components/Bubble";
 import LoadingBubble from "./components/LoadingBubble";
 import PromptSuggestionsRow from "./components/PromptSuggestionsRow";
+
 
 const Home = () => {
     const {
@@ -18,7 +20,16 @@ const Home = () => {
         append,
     } = useChat();
 
-    const noMessages = messages.length === 0;
+    const noMessages = !messages|| messages.length === 0;
+
+    const handlePrompt = (promptText) => {
+        const msg : Message = {
+            id:crypto.randomUUID(),
+            content:promptText,
+            role:"user",
+        }
+        append(msg);
+    }
 
     return (
         <main>
@@ -31,7 +42,7 @@ const Home = () => {
                             on the PDFs you upload. We hope you enjoy using it!
                         </p>
                         <br />
-                        <PromptSuggestionsRow/>
+                        <PromptSuggestionsRow onPromptClick={handlePrompt}/>
                     </>
                 ) : (
                     <>
